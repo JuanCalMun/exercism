@@ -6,9 +6,10 @@ class School {
   var database: DB = Map()
 
   def add(name: String, g: Int) = {
-    if (database.contains(g))
-      database += database(g) :+ name
-    else database += (g -> Seq(name))
+    val newValue =
+      if (database.contains(g)) database(g) :+ name
+      else Seq(name)
+    database += (g -> newValue)
   }
 
   def db: DB = database
@@ -17,6 +18,10 @@ class School {
     if (database.contains(g)) database(g)
     else Seq()
 
-  def sorted: DB = SortedMap(database.toSeq:_*).toMap
+  def sorted: DB =
+    SortedMap(database.toSeq: _*)
+      .toMap
+      .map(a => a._1 -> a._2.sorted)
+
 }
 
