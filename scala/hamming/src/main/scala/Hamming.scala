@@ -1,5 +1,3 @@
-
-
 object Hamming {
   def distance(s1: String, s2: String) = (s1, s2) match {
     case (s1, s2) if s1.length != s2.length => None
